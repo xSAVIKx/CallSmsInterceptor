@@ -3,27 +3,17 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <EditText
+    <TextView
         android:id="@+id/list_item_string"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:inputType="phone"
         android:paddingLeft="8dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_toLeftOf="@+id/add_btn"
-        android:layout_toStartOf="@+id/add_btn" />
-
-    <Button
-        android:id="@+id/add_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/delete_btn"
-        android:layout_toStartOf="@+id/delete_btn" />
+        android:layout_toStartOf="@+id/delete_btn"
+        android:layout_toLeftOf="@+id/delete_btn" />
 
     <Button
         android:id="@+id/delete_btn"

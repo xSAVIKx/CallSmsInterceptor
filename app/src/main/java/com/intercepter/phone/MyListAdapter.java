@@ -1,32 +1,23 @@
 package com.intercepter.phone;
 
 import android.content.Context;
-import android.telephony.PhoneNumberUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class MyListAdapter extends BaseAdapter implements ListAdapter {
-    private static ArrayList<String> list = new ArrayList<String>();
+    private ArrayList<String> list;
     private Context context;
 
-    public static boolean isInNumbers(String number) {
-        for (String element : list) {
-            if (PhoneNumberUtils.compare(element, number))
-                return true;
-        }
-        return false;
-    }
-
-    public MyListAdapter(ArrayList<String> list, Context context) {
-        this.list = list;
+    public MyListAdapter(Context context, ArrayList<String> list) {
         this.context = context;
+        this.list = list;
     }
 
     @Override
@@ -53,30 +44,18 @@ public class MyListAdapter extends BaseAdapter implements ListAdapter {
             view = inflater.inflate(R.layout.rules_list_layout, null);
         }
         //Handle TextView and display string from your list
-        EditText listItemText = (EditText) view.findViewById(R.id.list_item_string);
+        TextView listItemText = (TextView) view.findViewById(R.id.list_item_string);
 
         listItemText.setText(list.get(position));
 
         //Handle buttons and add onClickListeners
         Button deleteBtn = (Button) view.findViewById(R.id.delete_btn);
-        Button addBtn = (Button) view.findViewById(R.id.add_btn);
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //do something
-                if (list.size() > 1)
-                    list.remove(position); //or some other task
-                notifyDataSetChanged();
-            }
-        });
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View relativeLayout = (View) v.getParent();
-                EditText listItemText = (EditText) relativeLayout.findViewById(R.id.list_item_string);
-                list.set(position, listItemText.getText().toString());
-                list.add("");
+                list.remove(position); //or some other task
                 notifyDataSetChanged();
             }
         });
