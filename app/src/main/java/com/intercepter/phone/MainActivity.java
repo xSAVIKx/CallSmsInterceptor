@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class MyActivity extends Activity {
+public class MainActivity extends Activity {
 
     /**
      * Items entered by the user is stored in this ArrayList variable
@@ -53,7 +53,7 @@ public class MyActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my);
+        setContentView(R.layout.main);
         Button addButton = (Button) findViewById(R.id.add_button);
         if (adapter == null) {
             SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);

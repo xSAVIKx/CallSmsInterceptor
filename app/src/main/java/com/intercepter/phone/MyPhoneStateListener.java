@@ -32,7 +32,7 @@ public class MyPhoneStateListener extends PhoneStateListener {
         else {
             number = callingNumber;
         }
-        if (!MyActivity.isInNumbers(number))
+        if (!MainActivity.isInNumbers(number))
             return;
         switch (state) {
             case TelephonyManager.CALL_STATE_IDLE:

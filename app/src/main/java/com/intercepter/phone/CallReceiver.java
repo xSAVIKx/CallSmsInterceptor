@@ -4,14 +4,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
-public class MyReceiver extends BroadcastReceiver {
+public class CallReceiver extends BroadcastReceiver {
 
     static MyPhoneStateListener listener;
 
-    public MyReceiver() {
+    public CallReceiver() {
     }
 
     @Override
@@ -30,6 +29,6 @@ public class MyReceiver extends BroadcastReceiver {
             }
 
         }
-        telephony.listen(listener, PhoneStateListener.LISTEN_CALL_STATE);
+        telephony.listen(listener, MyPhoneStateListener.LISTEN_CALL_STATE);
     }
 }
