@@ -2,6 +2,8 @@ package com.intercepter.phone;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.PhoneNumberUtils;
 import android.view.Menu;
@@ -32,6 +34,9 @@ public class MainActivity extends Activity {
     public static final String BLOCKED_NUMBERS_PREF_NAME = "blocked_numbers";
 
     public static boolean isInNumbers(String number) {
+        if (number == null || number.isEmpty()) {
+            return false;
+        }
         for (String element : list) {
             if (PhoneNumberUtils.compare(element, number))
                 return true;
@@ -76,6 +81,8 @@ public class MainActivity extends Activity {
         addButton.setOnClickListener(addButtonListener);
         ListView lView = (ListView) findViewById(R.id.list);
         lView.setAdapter(adapter);
+        ContentObserver observer = new SmsContentObserver(this);
+        getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, observer);
     }
 
 
