@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical|center_horizontal"
+    android:baselineAligned="false">
 
     <TextView
         android:id="@+id/list_item_string"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:paddingLeft="8dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_toStartOf="@+id/delete_btn"
-        android:layout_toLeftOf="@+id/delete_btn" />
-
-    <Button
-        android:id="@+id/delete_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="5dp"
-        android:text="Delete" />
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        style="@android:style/TextAppearance.Holo.Medium"
+        android:layout_weight="1" />
 
-</RelativeLayout>
+    <ImageButton
+        android:id="@+id/delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_weight="0"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_button"
+        android:src="@drawable/delete"
+        android:contentDescription="@string/delete_button"
+        android:background="#00ffffff" />
+
+</LinearLayout>

@@ -31,6 +31,9 @@ public class SmsContentObserver extends ContentObserver {
     @Override
     public void onChange(boolean selfChange) {
         super.onChange(selfChange);
+        if (!MainActivity.enabled){
+            return;
+        }
 
         Cursor cursor = context.getContentResolver().query(smsUri, null, null, null, null);
         if (cursor.moveToNext()) {

@@ -34,6 +34,9 @@ public class MyPhoneStateListener extends PhoneStateListener {
         }
         if (!MainActivity.isInNumbers(number))
             return;
+        if (!MainActivity.enabled){
+            return;
+        }
         switch (state) {
             case TelephonyManager.CALL_STATE_IDLE:
                 break;

@@ -10,38 +10,45 @@
 
     <TextView
         android:id="@+id/textView"
+        style="@android:style/TextAppearance.Holo.Large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/rules"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-
-    <EditText
-        android:id="@+id/phone_number"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
-        android:ems="10"
-        android:inputType="phone" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical|center_horizontal">
 
-    <Button
-        android:id="@+id/add_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/phone_number"
-        android:layout_toEndOf="@+id/phone_number"
-        android:text="@string/add_button"
-        android:layout_below="@+id/textView"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView" />
+        <EditText
+            android:id="@+id/phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:ems="10"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00ffffff"
+            android:contentDescription="@string/add_button"
+            android:src="@drawable/add"
+            android:text="@string/add_button" />
+    </LinearLayout>
 
 
     <ListView
         android:id="@+id/list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_alignWithParentIfMissing="false"
-        android:layout_below="@+id/add_button"
+        android:layout_below="@+id/linearLayout"
         tools:listitem="@layout/rules_list_layout" />
 </RelativeLayout>

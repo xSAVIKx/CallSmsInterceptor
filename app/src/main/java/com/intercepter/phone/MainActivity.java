@@ -9,8 +9,8 @@ import android.telephony.PhoneNumberUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -19,6 +19,7 @@ import java.util.Set;
 
 
 public class MainActivity extends Activity {
+    public static boolean enabled = true;
 
     /**
      * Items entered by the user is stored in this ArrayList variable
@@ -59,7 +60,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        Button addButton = (Button) findViewById(R.id.add_button);
+        ImageButton addButton = (ImageButton) findViewById(R.id.add_button);
         if (adapter == null) {
             SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
             Set<String> stringSet = settings.getStringSet(BLOCKED_NUMBERS_PREF_NAME, new HashSet<String>());
@@ -99,9 +100,15 @@ public class MainActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            if (item.isChecked()) {
+                item.setChecked(false);
+                enabled = false;
+            } else {
+                item.setChecked(true);
+                enabled = true;
+            }
             return true;
         }
 
