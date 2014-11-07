@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
             return false;
         }
         for (String element : list) {
-            if (PhoneNumberUtils.compare(element, number))
+            if (PhoneNumberUtils.compare(number, element))
                 return true;
         }
         return false;

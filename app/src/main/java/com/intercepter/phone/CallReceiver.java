@@ -3,32 +3,47 @@ package com.intercepter.phone;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.telephony.TelephonyManager;
+import android.widget.Toast;
 
 public class CallReceiver extends BroadcastReceiver {
-
-    static MyPhoneStateListener listener;
 
     public CallReceiver() {
     }
 
     @Override
-    public void onReceive(Context context, Intent intent) {
-        TelephonyManager telephony = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-
-        if (listener == null)
-            listener = new MyPhoneStateListener(context);
+    public void onReceive(final Context context, final Intent intent) {
         if (intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)) {
-            Bundle bundle = intent.getExtras();
-            if (bundle.containsKey(Intent.EXTRA_PHONE_NUMBER)) {
-                String number = bundle.getString(Intent.EXTRA_PHONE_NUMBER);
-                if (!number.isEmpty()) {
-                    listener.setSavedNumber(number);
-                }
-            }
-
+            processOutgoingCall(context, intent);
         }
-        telephony.listen(listener, MyPhoneStateListener.LISTEN_CALL_STATE);
     }
+
+    private void processOutgoingCall(Context context, Intent intent) {
+        String phoneNumber = getPhoneNumber(intent);
+        if (isBlocked(phoneNumber)) {
+            endCall();
+            showToast(context, phoneNumber);
+        }
+    }
+
+    private String getPhoneNumber(Intent intent) {
+        String phoneNumber = getResultData();
+        if (phoneNumber == null || phoneNumber.isEmpty())
+            phoneNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
+        return phoneNumber;
+    }
+
+    private boolean isBlocked(String phoneNumber) {
+        return MainActivity.enabled && MainActivity.isInNumbers(phoneNumber);
+    }
+
+    private void endCall() {
+        setResultData(null);
+    }
+
+    private void showToast(Context context, String phoneNumber) {
+        Toast.makeText(context, "Call to " + phoneNumber + " was blocked", Toast.LENGTH_LONG).show();
+    }
+
+
 }
+
