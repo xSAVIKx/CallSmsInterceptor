@@ -19,6 +19,7 @@ import java.util.Set;
 
 
 public class MainActivity extends Activity {
+    public static final String TAG = "CallSmsIntercepter";
     public static boolean enabled = true;
 
     /**

@@ -3,6 +3,7 @@ package com.intercepter.phone;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 public class CallReceiver extends BroadcastReceiver {
@@ -20,6 +21,7 @@ public class CallReceiver extends BroadcastReceiver {
     private void processOutgoingCall(Context context, Intent intent) {
         String phoneNumber = getPhoneNumber(intent);
         if (isBlocked(phoneNumber)) {
+            Log.i(MainActivity.TAG, "Call to " + phoneNumber + " was blocked.");
             endCall();
             showToast(context, phoneNumber);
         }
